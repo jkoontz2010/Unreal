@@ -18,6 +18,9 @@ public:
 	// Sets default values for this actor's properties
 	ASItemChest();
 
+	UPROPERTY(EditAnywhere)
+	float TargetPitch;
+
 protected:
 
 	UPROPERTY(VisibleAnywhere)
