@@ -13,6 +13,8 @@ APCustomPhysicsSphere::APCustomPhysicsSphere()
 	SphereComp = CreateDefaultSubobject<USphereComponent>("SphereComp");
 	SphereComp->SetCollisionProfileName("Projectile");
 	RootComponent = SphereComp;
+	Speed = 0.0f;
+	bHasTicked = false;
 
 }
 
@@ -28,25 +30,18 @@ void APCustomPhysicsSphere::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// TRY world seconds OR (1 - DeltaTime) as seconds
 	FVector CurrentLocation = GetActorLocation();
-	FVector Gravity = { 0,0, -1.0f }; //0.098f * DeltaTime};
-	FVector NewLocation = CurrentLocation + Gravity;
-	// Standard way to log to console.
-	UE_LOG(LogTemp, Warning, TEXT("I just started running"));
+	float WORLD_SEC = GetWorld()->TimeSeconds;
+	float ACCEL = -980.f;
+	Speed = Speed + ACCEL * DeltaTime;
+	//Speed = Speed + GRAVITY;
+	FVector DeltaLocation = { 0,0, DeltaTime*Speed }; //0.098f * DeltaTime};
+	FVector NewLocation = CurrentLocation + DeltaLocation;
 
-	// Log to Screen
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("TICK"));
-
-	FVector MyVector = FVector(200, 100, 900);
-
-	// log vector
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("My CUR Location is: %s"), *CurrentLocation.ToString()));
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, FString::Printf(TEXT("My NEW Location is: %s"), *NewLocation.ToString()));
-
+	
 	// translate position accd. to gravity -> 9.8m/s
 	SetActorLocation(NewLocation, true);
-
-
 
 }
 

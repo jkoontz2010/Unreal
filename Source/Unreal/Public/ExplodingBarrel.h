@@ -4,28 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "PCustomPhysicsSphere.generated.h"
-
-class USphereComponent;
+#include "ExplodingBarrel.generated.h"
 
 UCLASS()
-class UNREAL_API APCustomPhysicsSphere : public AActor
+class UNREAL_API AExplodingBarrel : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	APCustomPhysicsSphere();
+	AExplodingBarrel();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere)
-	USphereComponent* SphereComp;
-
-	float Speed;
-	bool bHasTicked;
 
 public:	
 	// Called every frame
