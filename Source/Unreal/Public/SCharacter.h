@@ -10,6 +10,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class USInteractionComponent;
 class UAnimMontage;
+class USAttributeComponent;
 
 UCLASS()
 class UNREAL_API ASCharacter : public ACharacter
@@ -25,6 +26,9 @@ protected:
 	UAnimMontage* AttackAnim;
 
 	FTimerHandle TimerHandle_PrimaryAttack;
+
+	UPROPERTY(BlueprintReadOnly, Category="Components")
+	USAttributeComponent* AttributeComp;
 
 
 public:
